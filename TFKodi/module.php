@@ -92,6 +92,7 @@ class TFKodi extends IPSModule {
 			
 			$this->SetActuatorsByCatIdent("TFKodi_onPlay");
 			SetValue($this->GetIDForIdent("TFKodi_state"), 0);
+			IPS_Sleep(4);
 			$this->GetChannelInfo();
 			$this->GetDuration();
 			
