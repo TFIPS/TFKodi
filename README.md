@@ -13,7 +13,7 @@ Funktionen in Planung:
 
 
 Installation:
-- Modul TFKodi installieren von: https://github.com/Thomas184/TFKodi.git
+- Modul TFKodi installieren von: https://github.com/TFIPS/TFKodi.git
 - Instanz TFKodi hinzufügen
 - IP-Adresse von Kodi in der übergeordneten Instanz eintragen (TFKodi JSON-RPC-Socket) und aktivieren
 - ggf. Links zum WebFront erstellen
