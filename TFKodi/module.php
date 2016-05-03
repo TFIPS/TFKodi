@@ -443,12 +443,12 @@ class TFKodi extends IPSModule {
 			$scriptID = IPS_CreateScript(0);
 		
 			$script  = '<?'."\n";
-			$script .= '	if(GetValue($this->GetIDForIdent("TFKodi_state")) == 0){'."\n";
-			$script .= '		SetValue($this->GetIDForIdent("TFKodi_channel"), "");'."\n";
-			$script .= '		SetValue($this->GetIDForIdent("TFKodi_title"), "");'."\n";
-			$script .= '		SetValue($this->GetIDForIdent("TFKodi_duration"), 0);'."\n";
-			$script .= '		TFKodi_SetActuatorsByCatIdent('.$this->InstanceID.',"TFKodi_onStop");'."\n";
-			$script .= '		IPS_SetScriptTimer('.$scriptID.',0);'."\n";
+			$script .= '	if(GetValue(TFKodi_GetIDForIdent('.$this->InstanceID.', "TFKodi_state")) == 0){'."\n";
+			$script .= '		SetValue(TFKodi_GetIDForIdent('.$this->InstanceID.', "TFKodi_channel"), "");'."\n";
+			$script .= '		SetValue(TFKodi_GetIDForIdent('.$this->InstanceID.', "TFKodi_title"), "");'."\n";
+			$script .= '		SetValue(TFKodi_GetIDForIdent('.$this->InstanceID.', "TFKodi_duration"), 0);'."\n";
+			$script .= '		TFKodi_SetActuatorsByCatIdent('.$this->InstanceID.', "TFKodi_onStop");'."\n";
+			$script .= '		IPS_SetScriptTimer('.$scriptID.', 0);'."\n";
 			$script .= '	}'."\n";
 			$script .= '?>';
 			
