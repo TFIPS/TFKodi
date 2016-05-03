@@ -1,0 +1,11 @@
+{
+  "id": "{223fe920-1c9d-417d-bb5c-f52f9ee68e8a}",
+  "name": "TFKodi",
+  "type": 3,
+  "vendor": "Thomas Frese",
+  "aliases": [ "TFKodi" ],
+  "parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
+  "childRequirements": [],
+  "implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}"],
+  "prefix": "TFKODI"
+}
