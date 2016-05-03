@@ -449,6 +449,7 @@ class TFKodi extends IPSModule {
 			$script .= '		SetValue($this->GetIDForIdent("TFKodi_duration"), 0);'."\n";
 			$script .= '		TFKodi_SetActuatorsByCatIdent('.$this->InstanceID.',"TFKodi_onStop");'."\n";
 			$script .= '		IPS_SetScriptTimer('.$scriptID.',0);'."\n";
+			$script .= '	}'."\n";
 			$script .= '?>';
 			
 			IPS_SetName($scriptID, "TFKodi_Stop");
