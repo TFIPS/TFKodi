@@ -351,12 +351,12 @@ class TFKodi extends IPSModule {
 		$this->EnableAction("TFKodi_duration");
 		IPS_SetPosition($durationID,7);
 		
-		if(!IPS_VariableProfileExists("TFKodi_State")){											//Wenn Profil EMA_State nicht existiert
-			IPS_CreateVariableProfile("TFKodi_State", 1);												//Legt ein neues Profil für EMA_Status an
-			IPS_SetVariableProfileAssociation("TFKodi_State", 0, "Play", "Script", 0xFFFFFF);		//Status Unscharf in grün (ZZZ)	
-			IPS_SetVariableProfileAssociation("TFKodi_State", 1, "Stop", "Eyes", 0xFFFFFF);			//Status Scharf in rot (Augen)
-			IPS_SetVariableProfileAssociation("TFKodi_State", 2, "Pause", "Close", 0xFFFFFF);			//Status Scharf in rot (Augen)
-			IPS_SetVariableProfileAssociation("TFKodi_State", 3, "Screensaver", "Hourglass", 0xFFFFFF);			//Status Scharf in rot (Augen)
+		if(!IPS_VariableProfileExists("TFKodi_State")){
+			IPS_CreateVariableProfile("TFKodi_State", 1);
+			IPS_SetVariableProfileAssociation("TFKodi_State", 0, "Stop", "Close", 0xFFFFFF);
+			IPS_SetVariableProfileAssociation("TFKodi_State", 1, "Play", "Script", 0xFFFFFF);
+			IPS_SetVariableProfileAssociation("TFKodi_State", 2, "Pause", "Hourglass", 0xFFFFFF);
+			IPS_SetVariableProfileAssociation("TFKodi_State", 3, "Screensaver", "Sleep", 0xFFFFFF);
 			IPS_SetVariableProfileValues("TFKodi_State", 0, 3, 1);
 		}
 		
@@ -443,7 +443,7 @@ class TFKodi extends IPSModule {
 			$scriptID = IPS_CreateScript(0);
 		
 			$script  = '<?'."\n";
-			$script .= '	if(GetValue($this->GetIDForIdent("TFKodi_state") == 0){'."\n";
+			$script .= '	if(GetValue($this->GetIDForIdent("TFKodi_state")) == 0){'."\n";
 			$script .= '		SetValue($this->GetIDForIdent("TFKodi_channel"), "");'."\n";
 			$script .= '		SetValue($this->GetIDForIdent("TFKodi_title"), "");'."\n";
 			$script .= '		SetValue($this->GetIDForIdent("TFKodi_duration"), 0);'."\n";
