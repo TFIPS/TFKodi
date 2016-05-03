@@ -446,7 +446,7 @@ class TFKodi extends IPSModule {
 			$script .= '	if(GetValue(@IPS_GetObjectIDByIdent("TFKodi_state", '.$this->InstanceID.')) == 0){'."\n";
 			$script .= '		SetValue(@IPS_GetObjectIDByIdent("TFKodi_channel", '.$this->InstanceID.'), "");'."\n";
 			$script .= '		SetValue(@IPS_GetObjectIDByIdent("TFKodi_title", '.$this->InstanceID.'), "");'."\n";
-			$script .= '		SetValue(@IPS_GetObjectIDByIdent("TFKodi_duration, '.$this->InstanceID.'), 0);'."\n";
+			$script .= '		SetValue(@IPS_GetObjectIDByIdent("TFKodi_duration", '.$this->InstanceID.'), 0);'."\n";
 			$script .= '		TFKodi_SetActuatorsByCatIdent('.$this->InstanceID.', "TFKodi_onStop");'."\n";
 			$script .= '		IPS_SetScriptTimer('.$scriptID.', 0);'."\n";
 			$script .= '	}'."\n";
