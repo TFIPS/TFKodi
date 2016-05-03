@@ -437,19 +437,20 @@ class TFKodi extends IPSModule {
 	}
 	
 	private function CreateStopScript(){
-		$scriptsCatID 	= @IPS_GetObjectIDByIdent("TFKodi_scripts", $this->InstanceID);
-		$stopID			= @IPS_GetScriptIDByName("TFKodi_Stop", $scriptsCatID);
+		$scriptsCatID = @IPS_GetObjectIDByIdent("TFKodi_scripts", $this->InstanceID);
 		
-		$script  = '<?'."\n";
-		$script .= '	if(GetValue($this->GetIDForIdent("TFKodi_state") == 0){'."\n";
-		$script .= '		SetValue($this->GetIDForIdent("TFKodi_channel"), "");'."\n";
-		$script .= '		SetValue($this->GetIDForIdent("TFKodi_title"), "");'."\n";
-		$script .= '		SetValue($this->GetIDForIdent("TFKodi_duration"), 0);'."\n";
-		$script .= '		TFKodi_SetActuatorsByCatIdent('.$this->InstanceID.',"TFKodi_onStop");'."\n";
-		$script .= '		IPS_SetScriptTimer('.$stopID.',0);'."\n";
-		$script .= '?>';
 		if(!@IPS_GetScriptIDByName("TFKodi_Stop", $scriptsCatID)){
 			$scriptID = IPS_CreateScript(0);
+		
+			$script  = '<?'."\n";
+			$script .= '	if(GetValue($this->GetIDForIdent("TFKodi_state") == 0){'."\n";
+			$script .= '		SetValue($this->GetIDForIdent("TFKodi_channel"), "");'."\n";
+			$script .= '		SetValue($this->GetIDForIdent("TFKodi_title"), "");'."\n";
+			$script .= '		SetValue($this->GetIDForIdent("TFKodi_duration"), 0);'."\n";
+			$script .= '		TFKodi_SetActuatorsByCatIdent('.$this->InstanceID.',"TFKodi_onStop");'."\n";
+			$script .= '		IPS_SetScriptTimer('.$scriptID.',0);'."\n";
+			$script .= '?>';
+			
 			IPS_SetName($scriptID, "TFKodi_Stop");
 			IPS_SetScriptContent($scriptID, $script);
 			IPS_SetParent($scriptID, $scriptsCatID);
