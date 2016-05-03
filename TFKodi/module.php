@@ -87,18 +87,21 @@ class TFKodi extends IPSModule {
 	public function UpdateState($data){
 		//Play
 		if(isset($data["method"]) && $data["method"] == "Player.OnPlay"){
+			SetValue($this->GetIDForIdent("TFKodi_state"), 1);
+			
 			$scriptsCatID 	= @IPS_GetObjectIDByIdent("TFKodi_scripts", $this->InstanceID);
 			$updaterID		= @IPS_GetScriptIDByName("TFKodi_Updater", $scriptsCatID);
 			IPS_SetScriptTimer($updaterID,30);
 			
 			$this->SetActuatorsByCatIdent("TFKodi_onPlay");
-			SetValue($this->GetIDForIdent("TFKodi_state"), 1);
 			IPS_Sleep(4);
 			$this->GetChannelInfo();
 			$this->GetDuration();
 			
 		} else if(isset($data["method"]) && $data["method"] == "Player.OnStop"){
 			// Spezialfall: Beim Umschalten wird onStop aufgerufen, daher zeitverzögert prüfen
+			SetValue($this->GetIDForIdent("TFKodi_state"), 0);
+			
 			$scriptsCatID = @IPS_GetObjectIDByIdent("TFKodi_scripts", $this->InstanceID);
 			
 			$stopID		= @IPS_GetScriptIDByName("TFKodi_Stop", $scriptsCatID);
@@ -106,34 +109,22 @@ class TFKodi extends IPSModule {
 		
 			$updaterID		= @IPS_GetScriptIDByName("TFKodi_Updater", $scriptsCatID);
 			IPS_SetScriptTimer($updaterID,0);
-			
-			
-			
-			
-			/*
-			$this->SetActuatorsByCatIdent("TFKodi_onStop");
-			
-			SetValue($this->GetIDForIdent("TFKodi_state"), 1);
-			SetValue($this->GetIDForIdent("TFKodi_channel"), "");
-			SetValue($this->GetIDForIdent("TFKodi_title"), "");
-			SetValue($this->GetIDForIdent("TFKodi_duration"), 0);
-			*/
+						
 		} else if(isset($data["method"]) && $data["method"] == "Player.OnPause"){
+			SetValue($this->GetIDForIdent("TFKodi_state"), 2);
 			$scriptsCatID 	= @IPS_GetObjectIDByIdent("TFKodi_scripts", $this->InstanceID);
 			$updaterID		= @IPS_GetScriptIDByName("TFKodi_Updater", $scriptsCatID);
 			IPS_SetScriptTimer($updaterID,0);
 			
-			//$this->SetActuatorsByCatIdent("TFKodi_onPause");
-			
-			SetValue($this->GetIDForIdent("TFKodi_state"), 2);
+			$this->SetActuatorsByCatIdent("TFKodi_onPause");
 			
 		} else if(isset($data["method"]) && $data["method"] == "GUI.OnScreensaverActivated"){
+			SetValue($this->GetIDForIdent("TFKodi_state"), 3);
 			$scriptsCatID 	= @IPS_GetObjectIDByIdent("TFKodi_scripts", $this->InstanceID);
 			$updaterID		= @IPS_GetScriptIDByName("TFKodi_Updater", $scriptsCatID);
 			IPS_SetScriptTimer($updaterID,0);
 			
 			$this->SetActuatorsByCatIdent("TFKodi_screensaverActivated");
-			SetValue($this->GetIDForIdent("TFKodi_state"), 3);
 		}
 	}
 	
@@ -448,8 +439,8 @@ class TFKodi extends IPSModule {
 			$script .= '		SetValue(@IPS_GetObjectIDByIdent("TFKodi_title", '.$this->InstanceID.'), "");'."\n";
 			$script .= '		SetValue(@IPS_GetObjectIDByIdent("TFKodi_duration", '.$this->InstanceID.'), 0);'."\n";
 			$script .= '		TFKodi_SetActuatorsByCatIdent('.$this->InstanceID.', "TFKodi_onStop");'."\n";
-			$script .= '		IPS_SetScriptTimer('.$scriptID.', 0);'."\n";
 			$script .= '	}'."\n";
+			$script .= '	IPS_SetScriptTimer('.$scriptID.', 0);'."\n";
 			$script .= '?>';
 			
 			IPS_SetName($scriptID, "TFKodi_Stop");
